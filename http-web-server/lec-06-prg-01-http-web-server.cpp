@@ -3,6 +3,7 @@
 #include <thread>
 #include <sstream>
 #include <cstring>
+#include <vector>
 #include <winsock2.h>
 #pragma comment(lib, "ws2_32.lib")
 
@@ -50,7 +51,22 @@ public:
 
         std::string header = send_http_response_header();
         std::ostringstream body;
-        body << "<html><body><p>HTTP Request GET for Path: " << info.path << "</p></body></html>";
+
+        if (info.path.find('?') != std::string::npos) {
+            std::string params = info.path.substr(info.path.find('?') + 1);
+            auto vec = parameter_retrieval(params);
+            int result = simple_calc(vec[0], vec[1]);
+
+            body << "<html>";
+            body << "GET request for calculation => " << vec[0] << " x " << vec[1] << " = " << result;
+            body << "</html>";
+
+            std::cout << "## GET request for calculation => " << vec[0] << " x " << vec[1] << " = " << result << ".\n";
+        }
+        else {
+            body << "<html><p>HTTP Request GET for Path: " << info.path << "</p></html>";
+            std::cout << "## GET request for directory => " << info.path << ".\n";
+        }
 
         std::string response = header + body.str();
         send(client_socket, response.c_str(), response.size(), 0);
@@ -60,20 +76,76 @@ public:
         std::cout << "## do_POST() activated.\n";
         print_http_request_detail(client_ip, client_port, info);
 
+        auto vec = parameter_retrieval(body);
+        int result = simple_calc(vec[0], vec[1]);
+
         std::string header = send_http_response_header();
         std::ostringstream response_body;
-        response_body << "<html><body><p>POST data: " << body << "</p></body></html>";
+
+        response_body << "POST request for calculation => "
+            << vec[0] << " x " << vec[1] << " = " << result;
+
+        std::cout << "## POST request data => " << body << ".\n";
+        std::cout << "## POST request for calculation => "
+            << vec[0] << " x " << vec[1] << " = " << result << ".\n";
 
         std::string response = header + response_body.str();
         send(client_socket, response.c_str(), response.size(), 0);
     }
 
+
     void log_message() {}
-    void simple_calc() {}
-    void parameter_retrieval() {}
+
+    int simple_calc(int para1, int para2) {
+        return para1 * para2;
+    }
+
+    std::vector<int> parameter_retrieval(const std::string& msg) {
+        std::vector<int> result;
+        std::istringstream iss(msg);
+        std::string token;
+
+        while (std::getline(iss, token, '&')) {
+            auto pos = token.find('=');
+            if (pos != std::string::npos) {
+                result.push_back(std::stoi(token.substr(pos + 1)));
+            }
+        }
+        return result;
+    }
+    void handle_client(int client_socket, const std::string& client_ip, int client_port) {
+        char buffer[4096];
+        int bytes_received = recv(client_socket, buffer, sizeof(buffer), 0);
+
+        if (bytes_received <= 0) {
+            closesocket(client_socket);
+            return;
+        }
+
+        std::string request(buffer, bytes_received);
+
+        auto info = parse_http_request(request);
+
+        if (info.command == "GET") {
+            do_GET(client_socket, client_ip, client_port, info);
+        }
+        else if (info.command == "POST") {
+            std::string delimiter = "\r\n\r\n";
+            size_t pos = request.find(delimiter);
+            std::string body = (pos != std::string::npos) ? request.substr(pos + delimiter.length()) : "";
+
+            do_POST(client_socket, client_ip, client_port, info, body);
+        }
+
+        closesocket(client_socket);
+    }
 };
 
+
 int main() {
+    WSADATA wsaData;
+    WSAStartup(MAKEWORD(2, 2), &wsaData);
+
     const int PORT = 8080;
 
     int server_socket = socket(AF_INET, SOCK_STREAM, 0);
