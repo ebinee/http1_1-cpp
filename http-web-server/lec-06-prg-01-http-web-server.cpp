@@ -144,7 +144,11 @@ public:
 
 int main() {
     WSADATA wsaData;
-    WSAStartup(MAKEWORD(2, 2), &wsaData);
+    int wsaResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (wsaResult != 0) {
+        std::cerr << "WSAStartup failed: " << wsaResult << std::endl;
+        return 1;
+    }
 
     const int PORT = 8080;
 

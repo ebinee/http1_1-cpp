@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="http-web-server.cpp">
+    <ClCompile Include="lec-06-prg-01-http-web-server.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

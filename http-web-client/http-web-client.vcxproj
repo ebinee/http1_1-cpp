@@ -24,6 +24,7 @@
     <ProjectGuid>{4cefd0d7-7702-45c5-9c39-09be7bcae65e}</ProjectGuid>
     <RootNamespace>httpwebclient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>lec-06-prg-02-http-web-client</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -123,7 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="http-web-client.cpp" />
+    <ClCompile Include="lec-06-prg-02-http-web-client.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
