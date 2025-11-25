@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "http-web-server", "http-web-server\http-web-server.vcxproj", "{6651DFB0-02E1-45E3-99A4-8955B3F90464}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lec-06-prg-01-http-web-server", "http-web-server\http-web-server.vcxproj", "{6651DFB0-02E1-45E3-99A4-8955B3F90464}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "http-web-client", "http-web-client\http-web-client.vcxproj", "{4CEFD0D7-7702-45C5-9C39-09BE7BCAE65E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lec-06-prg-02-http-web-client", "http-web-client\http-web-client.vcxproj", "{4CEFD0D7-7702-45C5-9C39-09BE7BCAE65E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "json-example", "json-example\json-example.vcxproj", "{9341553D-C4D5-4A70-90C3-8EAE55EA498D}"
 EndProject

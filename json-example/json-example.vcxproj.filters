@@ -28,4 +28,17 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="lec-06-prg-03-json-example.json">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="lec-06-prg-04-json-example.json">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="json.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

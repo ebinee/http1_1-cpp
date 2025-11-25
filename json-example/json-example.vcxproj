@@ -124,10 +124,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="lec-06-prg-03-json-example.cpp" />
-    <ClCompile Include="lec-06-prg-04-json-example.cpp" />
-    <ClCompile Include="lec-06-prg-05-json-example.cpp" />
+    <ClCompile Include="lec-06-prg-03-json-example.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="lec-06-prg-04-json-example.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="lec-06-prg-05-json-example.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="lec-06-prg-06-json-example.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lec-06-prg-03-json-example.json" />
+    <None Include="lec-06-prg-04-json-example.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="json.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
