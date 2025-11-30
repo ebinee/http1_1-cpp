@@ -133,7 +133,9 @@
     <ClCompile Include="lec-06-prg-05-json-example.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="lec-06-prg-06-json-example.cpp" />
+    <ClCompile Include="lec-06-prg-06-json-example.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="lec-06-prg-03-json-example.json" />
