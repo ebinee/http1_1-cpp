@@ -2,6 +2,7 @@
 #include <string>
 #include <winsock2.h>
 #include "json.hpp"
+#include <ws2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 
 using json = nlohmann::json;
@@ -11,14 +12,14 @@ std::string http_request(const std::string& method,
     const std::string& body = "")
 {
     WSADATA wsa;
-    WSAStartup(MAKEWORD(2, 2), &wsa);
+    int wsaResult = WSAStartup(MAKEWORD(2, 2), &wsa);
 
     SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
 
     sockaddr_in server{};
     server.sin_family = AF_INET;
     server.sin_port = htons(8080);
-    server.sin_addr.s_addr = inet_addr("127.0.0.1");
+    inet_pton(AF_INET, "127.0.0.1", &server.sin_addr);
 
     connect(sock, (sockaddr*)&server, sizeof(server));
 

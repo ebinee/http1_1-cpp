@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #pragma comment(lib, "ws2_32.lib")
 
 std::string http_send_request(const std::string& host, int port, const std::string& request_msg) {
@@ -18,7 +19,7 @@ std::string http_send_request(const std::string& host, int port, const std::stri
     sockaddr_in server_addr{};
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
-    server_addr.sin_addr.s_addr = inet_addr(host.c_str());
+    inet_pton(AF_INET, host.c_str(), &server_addr.sin_addr);
 
     if (connect(sock, (sockaddr*)&server_addr, sizeof(server_addr)) == SOCKET_ERROR) {
         closesocket(sock);

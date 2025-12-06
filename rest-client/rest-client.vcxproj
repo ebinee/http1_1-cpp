@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\rest-server\lec-06-prg-07-rest-server-v3.cpp" />
+    <ClCompile Include="..\rest-server\lec-06-prg-07-rest-server-v3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\rest-server\json.hpp" />
